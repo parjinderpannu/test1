@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"net/url"
 )
 
 func main() {
@@ -41,17 +42,19 @@ func main() {
 }
 
 func githubInfo(login string) (string, int, error) {
-	url := "https://api.github.com/users/" + login
+	url := "https://api.github.com/users/" + url.PathEscape(login)
 	resp, err := http.Get(url)
 	if err != nil {
 		return "", 0, err
-		// log.Fatal("error: %s", err)
-		/*
-			log.Printf("error: %s", err)
-			os.Exit(1)
-		*/
 	}
-	var r Reply
+	if resp.StatusCode != http.StatusOK {
+		return "", 0, fmt.Errorf("%#v - %s", url, resp.Status)
+	}
+	var r struct { // anonymous struct
+		Login        string
+		Public_Repos int
+	}
+
 	dec := json.NewDecoder(resp.Body)
 	if err := dec.Decode(&r); err != nil {
 		log.Printf("error: can't decode - %s", err)
@@ -61,10 +64,10 @@ func githubInfo(login string) (string, int, error) {
 	return r.Login, r.Public_Repos, nil
 }
 
-type Reply struct {
-	Login        string
-	Public_Repos int
-}
+// type Reply struct {
+// 	Login        string
+// 	Public_Repos int
+// }
 
 /*
 JSON <--> GO [serialization or unmarshalling]
