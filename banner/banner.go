@@ -26,6 +26,19 @@ func main() {
 	x, y := 1, "1"
 	fmt.Printf("x=%v, y=%v\n", x, y)
 	fmt.Printf("x=%#v, y=%#v\n", x, y)
+	fmt.Println("go", isPalindrome("go"))
+	fmt.Println("\ngog", isPalindrome("gog"))
+
+	fmt.Println("\ng", isPalindrome("g"))
+}
+
+func isPalindrome(s string) bool {
+	for i := 0; i < len(s)/2; i++ {
+		if s[i] != s[len(s)-i-1] {
+			return false
+		}
+	}
+	return true
 }
 
 func banner(text string, width int) {
