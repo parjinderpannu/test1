@@ -16,10 +16,16 @@ func main() {
 		fmt.Println(i, v)
 	}
 
+	b := s[0]
+	c := s[1]
+	fmt.Printf("%c of type %T\n", b, b)
+	fmt.Printf("%c of type %T\n", c, c)
 	// strings are represented by two types
 	// byte (uint8)
 	// rune (int32)
-
+	x, y := 1, "1"
+	fmt.Printf("x=%v, y=%v\n", x, y)
+	fmt.Printf("x=%#v, y=%#v\n", x, y)
 }
 
 func banner(text string, width int) {
