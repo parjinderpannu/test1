@@ -1,3 +1,5 @@
+https://www.353solutions.com/c/znga/
+
 go mod init znga
 go build 
 go run hw.go
@@ -18,4 +20,6 @@ GOOS=linux go build
 GOARCH=amd64 GOOS=linux go build
 
 curl -i https://api.github.com/users/parjinderpannu
-curl -i -H 'User-Agent: Go' https://api.github.com/users/parjinderpannu
+curl -i -H 'User-Agent: Go' https://api.github.com/ousers/parjinderpannu
+
+cat http.log.gz| gunzip |sha1sum
