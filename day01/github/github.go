@@ -8,30 +8,57 @@ import (
 )
 
 func main() {
-	resp, err := http.Get("https://api.github.com/users/parjinderpannu")
+	login, repo_no, err := githubInfo("parjinderpannu")
 	if err != nil {
-		log.Fatal("error: %s", err)
+		log.Fatal("error: githubInfo - %s", err)
+	}
+
+	fmt.Printf("Login: %s \t repo_no: %d", login, repo_no)
+	// resp, err := http.Get("https://api.github.com/users/parjinderpannu")
+	// if err != nil {
+	// 	log.Fatal("error: %s", err)
+	// 	/*
+	// 		log.Printf("error: %s", err)
+	// 		os.Exit(1)
+	// 	*/
+	// }
+	// if resp.StatusCode != http.StatusOK {
+	// 	log.Fatalf("error:%s", resp.Status)
+	// }
+	// fmt.Printf("Content-Type: %s\n", resp.Header.Get("Content-Type"))
+	// /*
+	// 	if _, err := io.Copy(os.Stdout, resp.Body); err != nil {
+	// 		log.Fatal("error: can't copy - %s", err)
+	// 	}
+	// */
+
+	// var r Reply
+	// dec := json.NewDecoder(resp.Body)
+	// if err := dec.Decode(&r); err != nil {
+	// 	log.Printf("error: can't decode - %s", err)
+	// }
+	// fmt.Printf("%#v\n", r)
+}
+
+func githubInfo(login string) (string, int, error) {
+	url := "https://api.github.com/users/" + login
+	resp, err := http.Get(url)
+	if err != nil {
+		return "", 0, err
+		// log.Fatal("error: %s", err)
 		/*
 			log.Printf("error: %s", err)
 			os.Exit(1)
 		*/
 	}
-	if resp.StatusCode != http.StatusOK {
-		log.Fatalf("error:%s", resp.Status)
-	}
-	fmt.Printf("Content-Type: %s\n", resp.Header.Get("Content-Type"))
-	/*
-		if _, err := io.Copy(os.Stdout, resp.Body); err != nil {
-			log.Fatal("error: can't copy - %s", err)
-		}
-	*/
-
 	var r Reply
 	dec := json.NewDecoder(resp.Body)
 	if err := dec.Decode(&r); err != nil {
 		log.Printf("error: can't decode - %s", err)
+		return "", 0, err
 	}
-	fmt.Printf("%#v\n", r)
+
+	return r.Login, r.Public_Repos, nil
 }
 
 type Reply struct {
