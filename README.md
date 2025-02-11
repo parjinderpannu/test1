@@ -16,3 +16,6 @@ go mod tidy # Removes unnecessary dependencies and adds missing ones.
 go env GOARCH GOOS
 GOOS=linux go build
 GOARCH=amd64 GOOS=linux go build
+
+curl -i https://api.github.com/users/parjinderpannu
+curl -i -H 'User-Agent: Go' https://api.github.com/users/parjinderpannu
