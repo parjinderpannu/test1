@@ -10,5 +10,5 @@ import (
 // if func Main : capital then it is exported otherwise it is internal function. It is enforced by compiler.
 // when you save go code IDE runs formating
 func main() {
-	fmt.Println("Hello Gophers :-) \u263A")
+	fmt.Println("Hello Gophers :-) \u263A G☺")
 }
