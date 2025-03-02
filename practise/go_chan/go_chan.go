@@ -11,7 +11,7 @@ func main() {
 
 	for i := 0; i < 3; i++ {
 		// i assign to i again still work as well
-		i := i
+		i := i // i shadow i
 		go func() {
 			fmt.Println("For loop i: ", i)
 		}()
@@ -27,4 +27,10 @@ func main() {
 
 	time.Sleep(10 * time.Millisecond)
 	// main go routine terminate before other go routine finishes
+
+	ch := make(chan string)
+	ch <- "hi"  // send
+	msg := <-ch // receive
+	fmt.Println(msg)
+
 }
