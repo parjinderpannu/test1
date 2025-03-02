@@ -47,4 +47,9 @@ func main() {
 		fmt.Println("got : ", msg)
 	}
 
+	// receive from the closed channel
+	msg = <-ch // ch is closed
+	fmt.Printf("closed: %#v\n", msg)
+	// getting zero value without blocking
+
 }
