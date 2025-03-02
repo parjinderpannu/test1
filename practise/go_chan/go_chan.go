@@ -10,7 +10,7 @@ func main() {
 	fmt.Println("Inside main without go routine")
 
 	for i := 0; i < 3; i++ {
-		func() {
+		go func() {
 			fmt.Println("For loop i: ", i)
 		}()
 	}
