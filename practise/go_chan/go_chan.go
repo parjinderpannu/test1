@@ -29,8 +29,21 @@ func main() {
 	// main go routine terminate before other go routine finishes
 
 	ch := make(chan string)
-	ch <- "hi"  // send
+	go func() {
+		ch <- "hi" // send
+	}()
 	msg := <-ch // receive
 	fmt.Println(msg)
+
+	go func() {
+		for i := 0; i < 3; i++ {
+			msg := fmt.Sprintf("message #%d", i+1)
+			ch <- msg
+		}
+	}()
+
+	for msg := range ch {
+		fmt.Println("got : ", msg)
+	}
 
 }
