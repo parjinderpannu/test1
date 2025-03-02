@@ -2,6 +2,7 @@ https://www.353solutions.com/c/znga/
 https://x.com/jordancurve/status/1108475342468120576
 https://www.ardanlabs.com/blog/2018/08/scheduling-in-go-part1.html
 https://go-proverbs.github.io/
+https://www.353solutions.com/channel-semantics
 
 go mod init znga
 go build 

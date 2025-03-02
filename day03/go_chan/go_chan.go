@@ -37,6 +37,7 @@ func main() {
 		- receiving from closed channel will return the zero value without blocking
 		- send to a closed channel will panic
 		- closing a closed channel will panic
+		- send/receive to a nil channel will block forever
 	*/
 
 	go func() {
