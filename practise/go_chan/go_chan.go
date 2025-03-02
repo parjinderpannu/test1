@@ -10,9 +10,19 @@ func main() {
 	fmt.Println("Inside main without go routine")
 
 	for i := 0; i < 3; i++ {
+		// i assign to i again still work as well
+		i := i
 		go func() {
 			fmt.Println("For loop i: ", i)
 		}()
+		// go func() {
+		// 	fmt.Println("For loop i: ", i)
+		// }()
+
+		// parameter approach still works
+		// go func(i int) {
+		// 	fmt.Println("For loop i: ", i)
+		// }(i)
 	}
 
 	time.Sleep(10 * time.Millisecond)
