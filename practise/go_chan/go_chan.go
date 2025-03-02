@@ -40,6 +40,7 @@ func main() {
 			msg := fmt.Sprintf("message #%d", i+1)
 			ch <- msg
 		}
+		close(ch)
 	}()
 
 	for msg := range ch {
