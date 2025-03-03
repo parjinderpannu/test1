@@ -3,31 +3,33 @@ package main
 import (
 	"fmt"
 	"sync"
+	"time"
 )
 
 func main() {
 	p := Payment{
-		From:   "Wile e coyote",
+		From:   "Wile. E. Coyote",
 		To:     "ACME",
 		Amount: 123.34,
 	}
-
 	p.Process()
 	p.Process()
 }
 
 func (p *Payment) Process() {
-	p.once.Do(p.process)
+	t := time.Now()
+	p.once.Do(func() { p.process(t) })
 }
 
-func (p *Payment) process() {
-	fmt.Printf("%s -> $%.2f -> %s\n", p.From, p.Amount, p.To)
+func (p *Payment) process(t time.Time) {
+	ts := t.Format(time.RFC3339)
+	fmt.Printf("[%s] %s -> $%.2f -> %s\n", ts, p.From, p.Amount, p.To)
 }
 
 type Payment struct {
 	From   string
 	To     string
-	Amount float64 //USD
+	Amount float64 // USD
 
 	once sync.Once
 }
