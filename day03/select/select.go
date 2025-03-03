@@ -1,6 +1,9 @@
 package main
 
-import "time"
+import (
+	"fmt"
+	"time"
+)
 
 func main() {
 	ch1, ch2 := make(chan int), make(chan int)
@@ -14,4 +17,11 @@ func main() {
 		time.Sleep(20 * time.Millisecond)
 		ch2 <- 2
 	}()
+
+	select {
+	case val := <-ch1:
+		fmt.Println("ch1: ", val)
+	case val := <-ch2:
+		fmt.Println("ch2: ", val)
+	}
 }
