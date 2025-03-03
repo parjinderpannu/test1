@@ -27,6 +27,7 @@ func main() {
 		fmt.Println("ch1: ", val)
 	case val := <-ch2:
 		fmt.Println("ch2: ", val)
+	// case <-time.After(5*time.Millisecond):
 	case <-ctx.Done():
 		fmt.Println("Timeout Ctx")
 	}
