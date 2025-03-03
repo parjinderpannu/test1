@@ -10,9 +10,9 @@ import (
 )
 
 func main() {
-	ctx, cancel := context.WithTimeout(context.Background(), 3*time.Millisecond)
+	ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
 	defer cancel()
-	fmt.Println(githubInfo(ctx, "tebeka"))
+	fmt.Println(githubInfo(ctx, "parjinderpannu"))
 }
 
 // githubInfo returns name and number of public repos for login
